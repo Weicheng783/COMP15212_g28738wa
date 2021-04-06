@@ -17,6 +17,9 @@ class CyclicCache(Memory):
 
 
 class LRUCache(Memory):
+
+
+
     def name(self):
         return "LRU"
 
@@ -26,4 +29,38 @@ class LRUCache(Memory):
     # long as you provide a suitable overridding of the lookup method.
 
     def __init__(self):
+        self.cache_area_1 = None
+        self.cache_area_1_at = None
+        self.cache_area_2 = None
+        self.cache_area_2_at = None
+        self.cache_area_3 = None
+        self.cache_area_3_at = None
+        self.cache_area_4 = None
+        self.cache_area_4_at = None
+
         super().__init__()
+#        location = sys.stdin.readline().strip()
+#        print(super().lookup(self))
+
+    def lookup(self, address):
+
+
+        if(self.cache_area_1!=None and self.cache_area_2!=None and self.cache_area_3!=None and self.cache_area_4!=None):
+#            print(self.cache_area_1_at, self.cache_area_2_at, self.cache_area_3_at, self.cache_area_4_at)
+        elif (self.cache_area_1 == None):
+            self.cache_area_1 = super().lookup(address)
+            self.cache_area_1_at = super().get_hit_count()
+            return self.cache_area_1
+
+        elif(self.cache_area_2 == None):
+            self.cache_area_2 = super().lookup(address)
+            self.cache_area_2_at = super().get_hit_count()
+            return self.cache_area_2
+        elif(self.cache_area_3 == None):
+            self.cache_area_3 = super().lookup(address)
+            self.cache_area_3_at = super().get_hit_count()
+            return self.cache_area_3
+        elif(self.cache_area_4 == None):
+            self.cache_area_4 = super().lookup(address)
+            self.cache_area_4_at = super().get_hit_count()
+            return self.cache_area_4
