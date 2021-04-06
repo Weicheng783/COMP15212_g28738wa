@@ -17,6 +17,9 @@ class CyclicCache(Memory):
 
 
 class LRUCache(Memory):
+
+
+
     def name(self):
         return "LRU"
 
@@ -26,4 +29,29 @@ class LRUCache(Memory):
     # long as you provide a suitable overridding of the lookup method.
 
     def __init__(self):
+        self.cache_area_1 = None
+        self.cache_area_2 = None
+        self.cache_area_3 = None
+        self.cache_area_4 = None
+
         super().__init__()
+#        location = sys.stdin.readline().strip()
+#        print(super().lookup(self))
+
+    def lookup(self, address):
+        print("Memory Access", end=" ")
+
+
+        if(self.cache_area_1!=None and self.cache_area_2!=None and self.cache_area_3!=None and self.cache_area_4!=None):
+            print('all full!', end="")
+        elif (self.cache_area_1 == None):
+            self.cache_area_1 = super().lookup(address)
+            print(self.cache_area_1, end = "")
+        elif(self.cache_area_2 == None):
+            self.cache_area_2 = super().lookup(address)
+        elif(self.cache_area_3 == None):
+            self.cache_area_3 = super().lookup(address)
+        elif(self.cache_area_4 == None):
+            self.cache_area_4 = super().lookup(address)
+
+        
