@@ -1,6 +1,7 @@
 from memory import Memory
 
-# Your implementations of the classes below should not include any additional print statements. 
+# Your implementations of the classes below
+# should not include any additional print statements.
 
 
 class CyclicCache(Memory):
@@ -59,12 +60,9 @@ class CyclicCache(Memory):
                 self.cache_area_4 = address
                 self.next = 1
                 return super().lookup(address)
-                
 
 
 class LRUCache(Memory):
-
-
 
     def name(self):
         return "LRU"
@@ -107,22 +105,26 @@ class LRUCache(Memory):
             self.cache_area_4_at = self.time
 
         else:
-            if(self.cache_area_1 != None and self.cache_area_2 != None and self.cache_area_3 != None and self.cache_area_4 != None):
-                list = [self.cache_area_1_at,self.cache_area_2_at,self.cache_area_3_at,self.cache_area_4_at]
+            if(self.cache_area_1 is not None
+               and self.cache_area_2 is not None
+               and self.cache_area_3 is not None
+               and self.cache_area_4 is not None):
+                list = [self.cache_area_1_at, self.cache_area_2_at,
+                        self.cache_area_3_at, self.cache_area_4_at]
 
-                for i in range (0,len(list)):
+                for i in range(0, len(list)):
                     if list[i] == min(list):
                         minimal_index = i
                         break
 
-                if minimal_index == 0 :
+                if minimal_index == 0:
                     self.cache_area_1 = address
                     self.cache_area_1_at = self.time
                     return super().lookup(address)
                 elif minimal_index == 1:
                     self.cache_area_2 = address
                     self.cache_area_2_at = self.time
-                    return super().lookup(address)   
+                    return super().lookup(address)
                 elif minimal_index == 2:
                     self.cache_area_3 = address
                     self.cache_area_3_at = self.time
@@ -130,22 +132,21 @@ class LRUCache(Memory):
                 elif minimal_index == 3:
                     self.cache_area_4 = address
                     self.cache_area_4_at = self.time
-                    return super().lookup(address) 
-                
-            elif (self.cache_area_1 == None):
+                    return super().lookup(address)
+
+            elif (self.cache_area_1 is not None):
                 self.cache_area_1 = address
                 self.cache_area_1_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_2 == None):
+            elif (self.cache_area_2 is not None):
                 self.cache_area_2 = address
                 self.cache_area_2_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_3 == None):
+            elif (self.cache_area_3 is not None):
                 self.cache_area_3 = address
                 self.cache_area_3_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_4 == None):
+            elif (self.cache_area_4 is not None):
                 self.cache_area_4 = address
                 self.cache_area_4_at = self.time
                 return super().lookup(address)
-                
