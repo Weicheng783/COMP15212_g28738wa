@@ -134,19 +134,19 @@ class LRUCache(Memory):
                     self.cache_area_4_at = self.time
                     return super().lookup(address)
 
-            elif (self.cache_area_1 is not None):
+            elif (self.cache_area_1 is None):
                 self.cache_area_1 = address
                 self.cache_area_1_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_2 is not None):
+            elif (self.cache_area_2 is None):
                 self.cache_area_2 = address
                 self.cache_area_2_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_3 is not None):
+            elif (self.cache_area_3 is None):
                 self.cache_area_3 = address
                 self.cache_area_3_at = self.time
                 return super().lookup(address)
-            elif (self.cache_area_4 is not None):
+            elif (self.cache_area_4 is None):
                 self.cache_area_4 = address
                 self.cache_area_4_at = self.time
                 return super().lookup(address)
