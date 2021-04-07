@@ -13,6 +13,12 @@ class CyclicCache(Memory):
     # provide a suitable overridding of the lookup method.
 
     def __init__(self):
+        self.cache_area_1 = None
+        self.cache_area_2 = None
+        self.cache_area_3 = None
+        self.cache_area_4 = None
+        self.time = 0
+
         super().__init__()
 
 
@@ -37,30 +43,69 @@ class LRUCache(Memory):
         self.cache_area_3_at = None
         self.cache_area_4 = None
         self.cache_area_4_at = None
+        self.time = 0
 
         super().__init__()
-#        location = sys.stdin.readline().strip()
-#        print(super().lookup(self))
 
     def lookup(self, address):
+        self.time += 1
 
+        if(self.cache_area_1 == address):
 
-        if(self.cache_area_1!=None and self.cache_area_2!=None and self.cache_area_3!=None and self.cache_area_4!=None):
-#            print(self.cache_area_1_at, self.cache_area_2_at, self.cache_area_3_at, self.cache_area_4_at)
-        elif (self.cache_area_1 == None):
-            self.cache_area_1 = super().lookup(address)
-            self.cache_area_1_at = super().get_hit_count()
-            return self.cache_area_1
+            self.cache_area_1_at = self.time
 
-        elif(self.cache_area_2 == None):
-            self.cache_area_2 = super().lookup(address)
-            self.cache_area_2_at = super().get_hit_count()
-            return self.cache_area_2
-        elif(self.cache_area_3 == None):
-            self.cache_area_3 = super().lookup(address)
-            self.cache_area_3_at = super().get_hit_count()
-            return self.cache_area_3
-        elif(self.cache_area_4 == None):
-            self.cache_area_4 = super().lookup(address)
-            self.cache_area_4_at = super().get_hit_count()
-            return self.cache_area_4
+        elif (self.cache_area_2 == address):
+
+            self.cache_area_2_at = self.time
+
+        elif(self.cache_area_3 == address):
+
+            self.cache_area_3_at = self.time
+
+        elif(self.cache_area_4 == address):
+
+            self.cache_area_4_at = self.time
+
+        else:
+            if(self.cache_area_1 != None and self.cache_area_2 != None and self.cache_area_3 != None and self.cache_area_4 != None):
+                list = [self.cache_area_1_at,self.cache_area_2_at,self.cache_area_3_at,self.cache_area_4_at]
+
+                for i in range (0,len(list)):
+                    if list[i] == min(list):
+                        minimal_index = i
+                        break
+
+                if minimal_index == 0 :
+                    self.cache_area_1 = address
+                    self.cache_area_1_at = self.time
+                    return super().lookup(address)
+                elif minimal_index == 1:
+                    self.cache_area_2 = address
+                    self.cache_area_2_at = self.time
+                    return super().lookup(address)   
+                elif minimal_index == 2:
+                    self.cache_area_3 = address
+                    self.cache_area_3_at = self.time
+                    return super().lookup(address)
+                elif minimal_index == 3:
+                    self.cache_area_4 = address
+                    self.cache_area_4_at = self.time
+                    return super().lookup(address) 
+                
+            elif (self.cache_area_1 == None):
+                self.cache_area_1 = address
+                self.cache_area_1_at = self.time
+                return super().lookup(address)
+            elif (self.cache_area_2 == None):
+                self.cache_area_2 = address
+                self.cache_area_2_at = self.time
+                return super().lookup(address)
+            elif (self.cache_area_3 == None):
+                self.cache_area_3 = address
+                self.cache_area_3_at = self.time
+                return super().lookup(address)
+            elif (self.cache_area_4 == None):
+                self.cache_area_4 = address
+                self.cache_area_4_at = self.time
+                return super().lookup(address)
+                
