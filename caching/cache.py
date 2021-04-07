@@ -17,9 +17,49 @@ class CyclicCache(Memory):
         self.cache_area_2 = None
         self.cache_area_3 = None
         self.cache_area_4 = None
-        self.time = 0
+        self.next = 1
 
         super().__init__()
+
+    def lookup(self, address):
+
+        if(self.cache_area_1 == address):
+
+            return "Cached at addr 1."
+
+        elif (self.cache_area_2 == address):
+
+            return "Cached at addr 2."
+
+        elif(self.cache_area_3 == address):
+
+            return "Cached at addr 3."
+
+        elif(self.cache_area_4 == address):
+
+            return "Cached at addr 4."
+
+        else:
+            if self.next == 1:
+                self.cache_area_1 = address
+                self.next = 2
+                return super().lookup(address)
+
+            elif self.next == 2:
+                self.cache_area_2 = address
+                self.next = 3
+                return super().lookup(address)
+
+            elif self.next == 3:
+                self.cache_area_3 = address
+                self.next = 4
+                return super().lookup(address)
+
+            elif self.next == 4:
+                self.cache_area_4 = address
+                self.next = 1
+                return super().lookup(address)
+                
 
 
 class LRUCache(Memory):
