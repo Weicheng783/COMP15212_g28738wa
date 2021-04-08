@@ -18,6 +18,10 @@ class CyclicCache(Memory):
         self.cache_area_2 = None
         self.cache_area_3 = None
         self.cache_area_4 = None
+        self.cache_area_1_addr = None
+        self.cache_area_2_addr = None
+        self.cache_area_3_addr = None
+        self.cache_area_4_addr = None
         self.next = 1
 
         super().__init__()
@@ -26,40 +30,44 @@ class CyclicCache(Memory):
 
         if(self.cache_area_1 == address):
 
-            return "Cached at addr 1."
+            return "Memory Access "+self.cache_area_1_addr
 
         elif (self.cache_area_2 == address):
 
-            return "Cached at addr 2."
+            return "Memory Access "+self.cache_area_2_addr
 
         elif(self.cache_area_3 == address):
 
-            return "Cached at addr 3."
+            return "Memory Access "+self.cache_area_3_addr
 
         elif(self.cache_area_4 == address):
 
-            return "Cached at addr 4."
+            return "Memory Access "+self.cache_area_4_addr
 
         else:
             if self.next == 1:
                 self.cache_area_1 = address
                 self.next = 2
-                return super().lookup(address)
+                self.cache_area_1_addr = super().lookup(address)
+                return self.cache_area_1_addr
 
             elif self.next == 2:
                 self.cache_area_2 = address
                 self.next = 3
-                return super().lookup(address)
+                self.cache_area_2_addr = super().lookup(address)
+                return self.cache_area_2_addr
 
             elif self.next == 3:
                 self.cache_area_3 = address
                 self.next = 4
-                return super().lookup(address)
+                self.cache_area_3_addr = super().lookup(address)
+                return self.cache_area_3_addr
 
             elif self.next == 4:
                 self.cache_area_4 = address
                 self.next = 1
-                return super().lookup(address)
+                self.cache_area_4_addr = super().lookup(address)
+                return self.cache_area_4_addr
 
 
 class LRUCache(Memory):
@@ -75,12 +83,16 @@ class LRUCache(Memory):
     def __init__(self):
         self.cache_area_1 = None
         self.cache_area_1_at = None
+        self.cache_area_1_addr = None
         self.cache_area_2 = None
         self.cache_area_2_at = None
+        self.cache_area_2_addr = None
         self.cache_area_3 = None
         self.cache_area_3_at = None
+        self.cache_area_3_addr = None
         self.cache_area_4 = None
         self.cache_area_4_at = None
+        self.cache_area_4_addr = None
         self.time = 0
 
         super().__init__()
@@ -91,18 +103,22 @@ class LRUCache(Memory):
         if(self.cache_area_1 == address):
 
             self.cache_area_1_at = self.time
+            return "Memory Access "+self.cache_area_1_addr
 
         elif (self.cache_area_2 == address):
 
             self.cache_area_2_at = self.time
+            return "Memory Access "+self.cache_area_2_addr
 
         elif(self.cache_area_3 == address):
 
             self.cache_area_3_at = self.time
+            return "Memory Access "+self.cache_area_3_addr
 
         elif(self.cache_area_4 == address):
 
             self.cache_area_4_at = self.time
+            return "Memory Access "+self.cache_area_4_addr
 
         else:
             if(self.cache_area_1 is not None
@@ -120,33 +136,41 @@ class LRUCache(Memory):
                 if minimal_index == 0:
                     self.cache_area_1 = address
                     self.cache_area_1_at = self.time
-                    return super().lookup(address)
+                    self.cache_area_1_addr = super().lookup(address)
+                    return self.cache_area_1_addr
                 elif minimal_index == 1:
                     self.cache_area_2 = address
                     self.cache_area_2_at = self.time
-                    return super().lookup(address)
+                    self.cache_area_2_addr = super().lookup(address)
+                    return self.cache_area_2_addr
                 elif minimal_index == 2:
                     self.cache_area_3 = address
                     self.cache_area_3_at = self.time
-                    return super().lookup(address)
+                    self.cache_area_3_addr = super().lookup(address)
+                    return self.cache_area_3_addr
                 elif minimal_index == 3:
                     self.cache_area_4 = address
                     self.cache_area_4_at = self.time
-                    return super().lookup(address)
+                    self.cache_area_4_addr = super().lookup(address)
+                    return self.cache_area_4_addr
 
             elif (self.cache_area_1 is None):
                 self.cache_area_1 = address
                 self.cache_area_1_at = self.time
-                return super().lookup(address)
+                self.cache_area_1_addr = super().lookup(address)
+                return self.cache_area_1_addr
             elif (self.cache_area_2 is None):
                 self.cache_area_2 = address
                 self.cache_area_2_at = self.time
-                return super().lookup(address)
+                self.cache_area_2_addr = super().lookup(address)
+                return self.cache_area_2_addr
             elif (self.cache_area_3 is None):
                 self.cache_area_3 = address
                 self.cache_area_3_at = self.time
-                return super().lookup(address)
+                self.cache_area_3_addr = super().lookup(address)
+                return self.cache_area_3_addr
             elif (self.cache_area_4 is None):
                 self.cache_area_4 = address
                 self.cache_area_4_at = self.time
-                return super().lookup(address)
+                self.cache_area_4_addr = super().lookup(address)
+                return self.cache_area_4_addr
