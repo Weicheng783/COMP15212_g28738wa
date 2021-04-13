@@ -30,19 +30,19 @@ class CyclicCache(Memory):
 
         if(self.cache_area_1 == address):
 
-            return "Memory Access "+self.cache_area_1_addr
+            return self.cache_area_1_addr
 
         elif (self.cache_area_2 == address):
 
-            return "Memory Access "+self.cache_area_2_addr
+            return self.cache_area_2_addr
 
         elif(self.cache_area_3 == address):
 
-            return "Memory Access "+self.cache_area_3_addr
+            return self.cache_area_3_addr
 
         elif(self.cache_area_4 == address):
 
-            return "Memory Access "+self.cache_area_4_addr
+            return self.cache_area_4_addr
 
         else:
             if self.next == 1:
@@ -103,22 +103,22 @@ class LRUCache(Memory):
         if(self.cache_area_1 == address):
 
             self.cache_area_1_at = self.time
-            return "Memory Access "+self.cache_area_1_addr
+            return self.cache_area_1_addr
 
         elif (self.cache_area_2 == address):
 
             self.cache_area_2_at = self.time
-            return "Memory Access "+self.cache_area_2_addr
+            return self.cache_area_2_addr
 
         elif(self.cache_area_3 == address):
 
             self.cache_area_3_at = self.time
-            return "Memory Access "+self.cache_area_3_addr
+            return self.cache_area_3_addr
 
         elif(self.cache_area_4 == address):
 
             self.cache_area_4_at = self.time
-            return "Memory Access "+self.cache_area_4_addr
+            return self.cache_area_4_addr
 
         else:
             if(self.cache_area_1 is not None
